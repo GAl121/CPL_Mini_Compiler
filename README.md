@@ -6,41 +6,62 @@ Reserved words
 bgn break case final	default do  else	end  foreach if   int let    
 out program real   read  string  switch till  var  while with
 
-a
+
+Reserved symbols:
 
 (   )   {	}  
 ,   :   ;   !  
- Composed tokens
+
+
+Composed tokens:
+
 
 id:             letter (letter|digit)*
+
 num:            digit+  | digit+.digit*
+
 relop:          ==  |  <> | <  |  >  | >= | <=
-addop:          +   |  -   
+
+addop:          +   |  - 
+
 mulop:          *   |  /
-assignop:       =   
+
+assignop:       =
+
 orop:           ||
+
 andop:          &&
+
 sentance:       "(letter|.|,|!|?| |digit)* "
 
-Where:  (Note: digit and letter are not tokens)
+
+Where:  
+
    digit:  0  |  1  | ... |  9
+   
    letter: a  |  b  | ... |  z  |  A  |  B  | ... | Z
+   
 
 •	Token can include \n \t and space
+
 •	Each identifier can include maximum 9 characters.
+
 •	The code can include multi comment using /* comments */ , or single line comment using // 
 
+
 Extensions:
+
 •	if cpl program have errors mips file will not create
+
 •	The compiler will create list file with the original program and show each error points to the row and column.
+
 •	File that not end in .cpl will not works
 
 
 
 
 
-
-CPLG - Grammar for the programming language CPL
+CPLG - Grammar for the programming language CPL:
 
 
 PROGRAM   -> program id  bgn  DECLARATIONS  STMTLIST end 
@@ -63,7 +84,6 @@ TYPE ->  int
  
 CDECL -> final TYPE id assignop num; CDECL
         | epsilon
-	/* the value of id should not be changed during the program*/
 
 
 STMTLIST  ->  STMTLIST  STMT  
@@ -110,7 +130,7 @@ BOOLEXPR -> BOOLEXPR orop BOOLTERM
 BOOLTERM -> BOOLTERM andop BOOLFACTOR
    |         BOOLFACTOR
 
-BOOLFACTOR ->  ! (BOOLFACTOR) /*Meaning not BOOLFACTOR*/
+BOOLFACTOR ->  ! (BOOLFACTOR) 
 |EXPRESSION  relop  EXPRESSION  
 
 EXPRESSION -> EXPRESSION  addop  TERM 
@@ -125,4 +145,4 @@ FACTOR -> ( EXPRESSION )
           
 * epsilon = empty word
 
-![image](https://user-images.githubusercontent.com/39697797/165337828-b89c36f5-9073-4aa7-84bb-e3da30a45e17.png)
+
